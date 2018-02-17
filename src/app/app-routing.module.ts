@@ -3,12 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
     {
-        path: 'product',
-        loadChildren: './../product/product.module#ProductModule',
+        path: 'registerFirstStep',
+        loadChildren: './../registerFirstStep/registerFirstStep.module#RegisterFirstStepModule',
+    },
+    {
+        path: 'registerSecondStep',
+        loadChildren: './../registerSecondStep/registerSecondStep.module#RegisterSecondStepModule'
     },
     {
         path: '**',
-        redirectTo: 'product',
+        redirectTo: 'registerFirstStep',
         pathMatch: 'full',
     },
 ];

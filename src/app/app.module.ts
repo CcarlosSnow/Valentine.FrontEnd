@@ -3,7 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { HttpService } from '../app/services';
+import { HttpService, ParametroService, SolicitudCreditoService } from '../app/services';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -21,6 +21,6 @@ import { AppComponent } from './app.component';
   ],
   bootstrap: [ AppComponent ],
   schemas : [ NO_ERRORS_SCHEMA ],
-  providers : [ HttpService ],
+  providers : [ HttpService, ParametroService, SolicitudCreditoService ],
 })
 export class AppModule { }

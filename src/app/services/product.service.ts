@@ -12,7 +12,7 @@ export class ProductService {
     private PRODUCT_ENDPOINT: string = 'Products';
     private PRODUCTXML_ENDPOINT: string = 'ProductsXML';
     private BASE_URL: string = Utilities.buildRequestURL(
-        HostnameConstants.MULTIPLICA_WEBAPI.host);
+        HostnameConstants.VALENTINE_WEBAPI.host);
     private REQUEST_URL: string;
     private URL: string;
     constructor(private httpService: HttpService) {
