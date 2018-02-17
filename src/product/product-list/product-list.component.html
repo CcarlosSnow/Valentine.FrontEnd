@@ -1,0 +1,36 @@
+<h2>List Product</h2>
+
+<div class="btn-group" role="group" aria-label="Basic example">
+    <button 
+        type="button"
+        class="btn btn-primary"
+        (click)="addProduct()">
+        Add Product
+    </button>
+</div>
+
+<div class="row">
+    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+        Name
+    </div>
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <input type='text' class="form-control input-sm" placeholder='Filter' (keyup)='updateFilter($event)' />
+    </div>
+</div>
+
+<ngx-datatable
+    class="material"
+    [loadingIndicator]="loadingIndicator"
+    [rows]="rows"
+    [columns]="columns"
+    [columnMode]="'force'"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [rowHeight]="'auto'"
+    [limit]="10">
+</ngx-datatable>
+
+<ng-template #actionsTemplate let-row="row">
+    <a class="btn btn-link btn-xs" href="javascript:;" container="body" data-toggle="tooltip" title="Edit" (click)="editProduct(row)"><i class="fa fa-pencil-square-o fa-lg"></i></a>
+    <a class="btn btn-link btn-xs" href="javascript:;" container="body" data-toggle="tooltip" title="Delete" (click)="deteleProduct(row)"><i class="fa fa-trash fa-lg"></i></a>
+</ng-template>
