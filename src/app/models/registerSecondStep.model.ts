@@ -1,6 +1,7 @@
 import { BaseModel } from "./base.model";
 
 export class RegisterSecondStepModel extends BaseModel {
+    codigoSolCredito: number;
     direccionSolicitante: string;
     codigoPostalSolicitante: string;
     pais: number;
@@ -11,6 +12,7 @@ export class RegisterSecondStepModel extends BaseModel {
     plazoPrestamo: number;
     seguroDesgravamen: string;
     estadoCivil: number;
+    detalleMotivo: string;
     apellidoPaternoConyuge: string;
     apellidoMaternoConyuge: string;
     nombresConyuge: string;
@@ -21,7 +23,7 @@ export class RegisterSecondStepModel extends BaseModel {
     lugarTrabajo: string;
     tipoCuenta: number;
     banco: number;
-    cuentanumbererbancaria: string;
+    cuentaInterbancaria: string;
     esPEP: boolean;
     cargoPEP: string;
 }

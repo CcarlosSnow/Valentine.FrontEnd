@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs';
 
-import { RegisterFirstStepModel } from '../models';
+import { RegisterFirstStepModel, RegisterSecondStepModel } from '../models';
 import { EnviromentsConstants, HostnameConstants } from '../shared/constants';
 import { HttpService } from './http.service';
 import { Utilities } from './utilities';
@@ -25,7 +25,7 @@ export class SolicitudCreditoService {
         return this.httpService.post(this.URL, model);
     }
 
-    public registerSecondStep(id: number, model: RegisterFirstStepModel): Observable<any> {
+    public registerSecondStep(id: number, model: RegisterSecondStepModel): Observable<any> {
         this.URL = `${this.REQUEST_URL}/${id}`;
         return this.httpService.put(this.URL, model);
     }

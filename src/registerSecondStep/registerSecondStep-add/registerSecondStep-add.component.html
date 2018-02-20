@@ -1,14 +1,14 @@
 <h2> Registro de Solicitud de Crédito</h2>
 <div class="container">
     <div>
-        <form>
+        <form [formGroup]="registerSecondStepForm">
             <div class="form-group">
                 <div class="row">
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                         Dirección
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <input type="text" class="form-control input-sm" maxlength="255" />
+                        <input type="text" class="form-control input-sm" maxlength="255" formControlName="direccionSolicitante" />
                     </div>
                 </div>
                 <div class="row">
@@ -16,7 +16,7 @@
                         Código Postal
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <input type="text" class="form-control input-sm" maxlength="255" />
+                        <input type="text" class="form-control input-sm" maxlength="255" formControlName="codigoPostalSolicitante" />
                     </div>
                 </div>
                 <div class="row">
@@ -24,8 +24,8 @@
                         Pais
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <select class="form-control input-sm">
-                            <!-- <option *ngFor="let tipoDocumento of tipoDocumentoCombo" [ngValue]="tipoDocumento.ID">{{tipoDocumento.Nombre}}</option> -->
+                        <select class="form-control input-sm" #pais formControlName="pais" (change)="paisChange(pais.value)">
+                            <option *ngFor="let pais of paisCombo" [value]="pais.Ubigeo_ID">{{pais.Nombre}}</option>
                         </select>
                     </div>
                 </div>
@@ -34,8 +34,8 @@
                         Departamento
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <select class="form-control input-sm">
-                            <!-- <option *ngFor="let tipoDocumento of tipoDocumentoCombo" [ngValue]="tipoDocumento.ID">{{tipoDocumento.Nombre}}</option> -->
+                        <select class="form-control input-sm" #departamento formControlName="departamento" (change)="departamentoChange(departamento.value)">
+                            <option *ngFor="let departamento of departamentoCombo" [value]="departamento.Ubigeo_ID">{{departamento.Nombre}}</option>
                         </select>
                     </div>
                 </div>
@@ -44,8 +44,8 @@
                         Provincia
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <select class="form-control input-sm">
-                            <!-- <option *ngFor="let tipoDocumento of tipoDocumentoCombo" [ngValue]="tipoDocumento.ID">{{tipoDocumento.Nombre}}</option> -->
+                        <select class="form-control input-sm" #provincia formControlName="provincia" (change)="provinciaChange(provincia.value)">
+                            <option *ngFor="let provincia of provinciaCombo" [value]="provincia.Ubigeo_ID">{{provincia.Nombre}}</option>
                         </select>
                     </div>
                 </div>
@@ -54,8 +54,8 @@
                         Distrito
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <select class="form-control input-sm">
-                            <!-- <option *ngFor="let tipoDocumento of tipoDocumentoCombo" [ngValue]="tipoDocumento.ID">{{tipoDocumento.Nombre}}</option> -->
+                        <select class="form-control input-sm" formControlName="distrito">
+                            <option *ngFor="let distrito of distritoCombo" [value]="distrito.Ubigeo_ID">{{distrito.Nombre}}</option>
                         </select>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
                         Monto Solicitado
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <input type="text" class="form-control input-sm" maxlength="1" />
+                        <input type="number" min="1" max="1000000" step="1" maxlength="7" class="form-control input-sm" formControlName="montoSolicitado" />
                     </div>
                 </div>
                 <div class="row">
@@ -72,7 +72,7 @@
                         Plazo del Préstamo
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <input type="text" class="form-control input-sm" maxlength="1" />
+                        <input type="number" min="1" max="72" step="1" class="form-control input-sm" formControlName="plazoPrestamo" />
                     </div>
                 </div>
                 <div class="row">
@@ -80,7 +80,7 @@
                         Seguro Degravamen
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <input type="text" class="form-control input-sm" maxlength="255" />
+                        <input type="text" class="form-control input-sm" maxlength="255" formControlName="seguroDesgravamen" />
                     </div>
                 </div>
                 <div class="row">
@@ -88,8 +88,8 @@
                         Estado Civil
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <select class="form-control input-sm" >
-                            <!-- <option *ngFor="let tipoDocumento of tipoDocumentoCombo" [ngValue]="tipoDocumento.ID">{{tipoDocumento.Nombre}}</option> -->
+                        <select class="form-control input-sm" formControlName="estadoCivil">
+                            <option *ngFor="let estadoCivil of estadoCivilCombo" [ngValue]="estadoCivil.ID">{{estadoCivil.Nombre}}</option>
                         </select>
                     </div>
                 </div>
@@ -98,7 +98,7 @@
                         Detalle el motivo del préstamo
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <input type="text" class="form-control input-sm" maxlength="255" />
+                        <input type="text" class="form-control input-sm" maxlength="255" formControlName="detalleMotivo" />
                     </div>
                 </div>
                 Datos de tu Pareja
@@ -107,7 +107,7 @@
                         Nombres
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <input type="text" class="form-control input-sm" maxlength="255" />
+                        <input type="text" class="form-control input-sm" maxlength="255" formControlName="nombresConyuge" />
                     </div>
                 </div>
                 <div class="row">
@@ -115,7 +115,7 @@
                         Apellido Paterno
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <input type="text" class="form-control input-sm" maxlength="255" />
+                        <input type="text" class="form-control input-sm" maxlength="255" formControlName="apellidoPaternoConyuge" />
                     </div>
                 </div>
                 <div class="row">
@@ -123,7 +123,7 @@
                         Apellido Materno
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <input type="text" class="form-control input-sm" maxlength="255" />
+                        <input type="text" class="form-control input-sm" maxlength="255" formControlName="apellidoPaternoConyuge" />
                     </div>
                 </div>
                 <div class="row">
@@ -131,8 +131,8 @@
                         Tipo Documento
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <select class="form-control input-sm">
-                            <!-- <option *ngFor="let tipoDocumento of tipoDocumentoCombo" [ngValue]="tipoDocumento.ID">{{tipoDocumento.Nombre}}</option> -->
+                        <select class="form-control input-sm" formControlName="tipoDocumentoConyuge">
+                            <option *ngFor="let tipoDocumento of tipoDocumentoCombo" [ngValue]="tipoDocumento.ID">{{tipoDocumento.Nombre}}</option>
                         </select>
                     </div>
                 </div>
@@ -141,7 +141,7 @@
                         Numero Documento
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <input type="text" class="form-control input-sm" maxlength="255" />
+                        <input type="text" class="form-control input-sm" maxlength="255" formControlName="numeroDocConyuge" />
                     </div>
                 </div>
                 ¿Como Generas Ingresos?
@@ -150,8 +150,8 @@
                         Tipo de Actividad
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <select class="form-control input-sm">
-                            <!-- <option *ngFor="let tipoDocumento of tipoDocumentoCombo" [ngValue]="tipoDocumento.ID">{{tipoDocumento.Nombre}}</option> -->
+                        <select class="form-control input-sm" formControlName="tipoActividad">
+                            <option *ngFor="let tipoActividad of tipoActividadCombo" [ngValue]="tipoActividad.ID">{{tipoActividad.Nombre}}</option>
                         </select>
                     </div>
                 </div>
@@ -160,8 +160,8 @@
                         Rubro de Actividad
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <select class="form-control input-sm">
-                            <!-- <option *ngFor="let tipoDocumento of tipoDocumentoCombo" [ngValue]="tipoDocumento.ID">{{tipoDocumento.Nombre}}</option> -->
+                        <select class="form-control input-sm" formControlName="rubroActividad">
+                            <option *ngFor="let rubroActividad of rubroActividadCombo" [ngValue]="rubroActividad.ID">{{rubroActividad.Nombre}}</option>
                         </select>
                     </div>
                 </div>
@@ -170,7 +170,7 @@
                         Lugar de Trabajo
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <input type="text" class="form-control input-sm" maxlength="255" />
+                        <input type="text" class="form-control input-sm" maxlength="255" formControlName="lugarTrabajo" />
                     </div>
                 </div>
                 Necesitamos los datos de tu cuenta
@@ -179,8 +179,8 @@
                         Tipo de Cuenta
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <select class="form-control input-sm">
-                            <!-- <option *ngFor="let tipoDocumento of tipoDocumentoCombo" [ngValue]="tipoDocumento.ID">{{tipoDocumento.Nombre}}</option> -->
+                        <select class="form-control input-sm" formControlName="tipoCuenta">
+                            <option *ngFor="let tipoCuenta of tipoCuentaCombo" [ngValue]="tipoCuenta.ID">{{tipoCuenta.Nombre}}</option>
                         </select>
                     </div>
                 </div>
@@ -189,8 +189,8 @@
                         Nombre del Banco
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <select class="form-control input-sm">
-                            <!-- <option *ngFor="let tipoDocumento of tipoDocumentoCombo" [ngValue]="tipoDocumento.ID">{{tipoDocumento.Nombre}}</option> -->
+                        <select class="form-control input-sm" formControlName="banco">
+                            <option *ngFor="let nombreBanco of nombreBancoCombo" [ngValue]="nombreBanco.ID">{{nombreBanco.Nombre}}</option>
                         </select>
                     </div>
                 </div>
@@ -199,13 +199,29 @@
                         Codigo Interbancario de la cuenta
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <input type="text" class="form-control input-sm" maxlength="255" />
+                        <input type="text" class="form-control input-sm" maxlength="255" formControlName="cuentaInterbancaria" />
                     </div>
                 </div>
-                <!-- <div class="row">
-                    <button type="button" class="btn btn-default button" [disabled]="!registerFirstStepForm.valid" (click)="registerFirstStep()">
+                <div class="row">
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        ¿Es una persona expuesta políticamente (PEP) o familiar de una PEP?
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <input type="checkbox" class="form-control input-sm" formControlName="esPEP" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        Posición de ocupa
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <input type="text" class="form-control input-sm" maxlength="255" formControlName="cargoPEP" />
+                    </div>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-default button" (click)="registerSecondStep()">
                         <i class="fa fa-floppy-o" aria-hidden="true"></i> Siguiente</button>
-                </div> -->
+                </div>
             </div>
         </form>
     </div>

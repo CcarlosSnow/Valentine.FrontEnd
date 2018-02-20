@@ -11,6 +11,18 @@ const routes: Routes = [
         loadChildren: './../registerSecondStep/registerSecondStep.module#RegisterSecondStepModule'
     },
     {
+        path: 'successClips',
+        loadChildren: './../successClips/successClips.module#SuccessClipsModule'
+    },
+    {
+        path: 'notSuccessClips',
+        loadChildren: './../notSuccessClips/notSuccessClips.module#NotSuccessClipsModule'
+    },
+    {
+        path: 'successAll',
+        loadChildren: './../successAll/successAll.module#SuccessAllModule'
+    },
+    {
         path: '**',
         redirectTo: 'registerFirstStep',
         pathMatch: 'full',

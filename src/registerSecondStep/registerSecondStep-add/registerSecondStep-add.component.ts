@@ -2,10 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { RegisterFirstStepModel, ParametroModel } from '../../app/models';
-import { ParametroService, SolicitudCreditoService } from '../../app/services';
+import { RegisterSecondStepModel, ParametroModel, UbigeoModel } from '../../app/models';
+import { ParametroService, SolicitudCreditoService, UbigeoService } from '../../app/services';
 import { FormStatusConstants, ParametroConstants } from '../../app/shared/constants';
-
 
 @Component({
     selector: 'app-registerSecondStep-add',
@@ -14,59 +13,104 @@ import { FormStatusConstants, ParametroConstants } from '../../app/shared/consta
 })
 
 export class RegisterSecondStepAddComponent implements OnInit, OnDestroy {
-    // tipoDocumentoCombo: ParametroModel[] = [];
-    // sexoCombo: ParametroModel[] = [];
-    // gradoInstruccionCombo: ParametroModel[] = [];
-    // destinoCreditoCombo: ParametroModel[] = [];
-    // registerFirstStepModel: RegisterFirstStepModel = new RegisterFirstStepModel();
-    // productId: number;
+    paisCombo: UbigeoModel[] = [];
+    departamentoCombo: UbigeoModel[] = [];
+    provinciaCombo: UbigeoModel[] = [];
+    distritoCombo: UbigeoModel[] = [];
+    estadoCivilCombo: ParametroModel[] = [];
+    tipoDocumentoCombo: ParametroModel[] = [];
+    rubroActividadtipoDocumentoCombo: ParametroModel[] = [];
+    tipoActividadCombo: ParametroModel[] = [];
+    rubroActividadCombo: ParametroModel[] = [];
+    tipoCuentaCombo: ParametroModel[] = [];
+    nombreBancoCombo: ParametroModel[] = [];
+    registerSecondStepModel: RegisterSecondStepModel = new RegisterSecondStepModel();
+    id: number;
 
-    // registerFirstStepForm = new FormGroup({
-    //     nombreSolicitante: new FormControl(null, [Validators.required]),
-    //     apellidoParternoSolicitante: new FormControl(null, [Validators.required]),
-    //     apellidoMaternoSolicitante: new FormControl(null, [Validators.required]),
-    //     fechaNacimiento: new FormControl(null, [Validators.required]),
-    //     tipoDocumento: new FormControl(null, [Validators.required]),
-    //     numeroDocumento: new FormControl(null, [Validators.required]),
-    //     digitoVerificacion: new FormControl(null, [Validators.required]),
-    //     genero: new FormControl(null, [Validators.required]),
-    //     correoElectronico: new FormControl(null, [Validators.required]),
-    //     numeroCelular: new FormControl(null, [Validators.required]),
-    //     ingresosMensuales: new FormControl(null, [Validators.required]),
-    //     gradoInstruccion: new FormControl(null, [Validators.required]),
-    //     destinoCredito: new FormControl(null, [Validators.required]),
-    // });
+    registerSecondStepForm = new FormGroup({
+        direccionSolicitante: new FormControl(null, [Validators.required]),
+        codigoPostalSolicitante: new FormControl(null, [Validators.required]),
+        pais: new FormControl(null, [Validators.required]),
+        departamento: new FormControl(null, [Validators.required]),
+        provincia: new FormControl(null, [Validators.required]),
+        distrito: new FormControl(null, [Validators.required]),
+        montoSolicitado: new FormControl(null, [Validators.required]),
+        plazoPrestamo: new FormControl(null, [Validators.required]),
+        seguroDesgravamen: new FormControl(null, [Validators.required]),
+        estadoCivil: new FormControl(null, [Validators.required]),
+        detalleMotivo: new FormControl(null, [Validators.required]),
+        apellidoPaternoConyuge: new FormControl(null, [Validators.required]),
+        apellidoMaternoConyuge: new FormControl(null, [Validators.required]),
+        nombresConyuge: new FormControl(null, [Validators.required]),
+        tipoDocumentoConyuge: new FormControl(null, [Validators.required]),
+        numeroDocConyuge: new FormControl(null, [Validators.required]),
+        tipoActividad: new FormControl(null, [Validators.required]),
+        rubroActividad: new FormControl(null, [Validators.required]),
+        lugarTrabajo: new FormControl(null, [Validators.required]),
+        tipoCuenta: new FormControl(null, [Validators.required]),
+        banco: new FormControl(null, [Validators.required]),
+        cuentaInterbancaria: new FormControl(null, [Validators.required]),
+        esPEP: new FormControl(),
+        cargoPEP: new FormControl(null, [Validators.required]),
+    });
 
     constructor(
-        // private parametroService: ParametroService,
-        // private solicitudCreditoService: SolicitudCreditoService,
-        // private route: ActivatedRoute,
-        // private router: Router,
+        private parametroService: ParametroService,
+        private solicitudCreditoService: SolicitudCreditoService,
+        private route: ActivatedRoute,
+        private router: Router,
+        private ubigeoService: UbigeoService
     ) {
 
-        // this.parametroService.getByPadreID(ParametroConstants.TIPODOCUMENTO).subscribe(
-        //     (result: ParametroModel[]) => {
-        //         this.tipoDocumentoCombo = result;
-        //     },
-        //     error => console.error(error));
+        this.route.params.subscribe(params => {
+            const id = params.Id;
+            if (id) {
+                this.id = id;
+                console.log(id);
+            }
+        });
 
-        // this.parametroService.getByPadreID(ParametroConstants.SEXO).subscribe(
-        //     (result: ParametroModel[]) => {
-        //         this.sexoCombo = result;
-        //     },
-        //     error => console.error(error));
+        this.ubigeoService.getByPadreID(0).subscribe(
+            (result: UbigeoModel[]) => {
+                this.paisCombo = result;
+            },
+            error => console.error(error));
 
-        // this.parametroService.getByPadreID(ParametroConstants.GRADOINSTRUCCION).subscribe(
-        //     (result: ParametroModel[]) => {
-        //         this.gradoInstruccionCombo = result;
-        //     },
-        //     error => console.error(error));
+        this.parametroService.getByPadreID(ParametroConstants.ESTADOCIVIL).subscribe(
+            (result: ParametroModel[]) => {
+                this.estadoCivilCombo = result;
+            },
+            error => console.error(error));
 
-        // this.parametroService.getByPadreID(ParametroConstants.DESTINOCREDITO).subscribe(
-        //     (result: ParametroModel[]) => {
-        //         this.destinoCreditoCombo = result;
-        //     },
-        //     error => console.error(error));
+        this.parametroService.getByPadreID(ParametroConstants.TIPODOCUMENTO).subscribe(
+            (result: ParametroModel[]) => {
+                this.tipoDocumentoCombo = result;
+            },
+            error => console.error(error));
+
+        this.parametroService.getByPadreID(ParametroConstants.TIPOACTIVIDAD).subscribe(
+            (result: ParametroModel[]) => {
+                this.tipoActividadCombo = result;
+            },
+            error => console.error(error));
+
+        this.parametroService.getByPadreID(ParametroConstants.RUBROACTIVIDAD).subscribe(
+            (result: ParametroModel[]) => {
+                this.rubroActividadCombo = result;
+            },
+            error => console.error(error));
+
+        this.parametroService.getByPadreID(ParametroConstants.TIPOCUENTA).subscribe(
+            (result: ParametroModel[]) => {
+                this.tipoCuentaCombo = result;
+            },
+            error => console.error(error));
+
+        this.parametroService.getByPadreID(ParametroConstants.BANCOS).subscribe(
+            (result: ParametroModel[]) => {
+                this.nombreBancoCombo = result;
+            },
+            error => console.error(error));
     }
 
     ngOnInit(): void {
@@ -77,12 +121,38 @@ export class RegisterSecondStepAddComponent implements OnInit, OnDestroy {
         // any
     }
 
+    paisChange(id: any): void {
+        console.log('id', id);
+        this.ubigeoService.getByPadreID(id).subscribe(
+            (result: UbigeoModel[]) => {
+                console.log(result);
+                this.departamentoCombo = result;
+            },
+            error => console.error(error));
+    }
+
+    departamentoChange(id: number): void {
+        this.ubigeoService.getByPadreID(id).subscribe(
+            (result: UbigeoModel[]) => {
+                this.provinciaCombo = result;
+            },
+            error => console.error(error));
+    }
+
+    provinciaChange(id: number): void {
+        this.ubigeoService.getByPadreID(id).subscribe(
+            (result: UbigeoModel[]) => {
+                this.distritoCombo = result;
+            },
+            error => console.error(error));
+    }
+
     registerSecondStep(): void {
-        /* this.registerFirstStepModel.setAll(this.registerFirstStepForm.value);
-        this.solicitudCreditoService.registerFirstStep(this.registerFirstStepModel).subscribe(
-            (registerFirstStepModelResult: RegisterFirstStepModel) => {
-                
+        this.registerSecondStepModel.setAll(this.registerSecondStepForm.value);
+        this.solicitudCreditoService.registerSecondStep(this.id, this.registerSecondStepModel).subscribe(
+            (registerSecondStepModelResult: RegisterSecondStepModel) => {
+                this.router.navigate(['/successAll']);
             }, error => console.error(error)
-        ); */
+        );
     }
 }

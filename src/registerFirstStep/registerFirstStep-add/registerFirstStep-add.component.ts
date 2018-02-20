@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { RegisterFirstStepModel, ParametroModel } from '../../app/models';
-import { ParametroService, SolicitudCreditoService } from '../../app/services';
+import { ClipsService, ParametroService, SolicitudCreditoService } from '../../app/services';
 import { FormStatusConstants, ParametroConstants } from '../../app/shared/constants';
 
 
@@ -38,6 +38,7 @@ export class RegisterFirstStepAddComponent implements OnInit, OnDestroy {
     });
 
     constructor(
+        private clipsService: ClipsService,
         private parametroService: ParametroService,
         private solicitudCreditoService: SolicitudCreditoService,
         private route: ActivatedRoute,
@@ -78,10 +79,20 @@ export class RegisterFirstStepAddComponent implements OnInit, OnDestroy {
     }
 
     registerFirstStep(): void {
-        this.registerFirstStepModel.setAll(this.registerFirstStepForm.value);
-        this.solicitudCreditoService.registerFirstStep(this.registerFirstStepModel).subscribe(
-            (registerFirstStepModelResult: RegisterFirstStepModel) => {
-                this.router.navigate(['/registerSecondStep']);
+        this.clipsService.getResultEvaluation().subscribe(
+            (result: string) => {
+                console.log(result);
+                if (result == 'rechazada') {
+                    this.router.navigate(['/notSuccessClips']);
+                }
+                else {
+                    this.registerFirstStepModel.setAll(this.registerFirstStepForm.value);
+                    this.solicitudCreditoService.registerFirstStep(this.registerFirstStepModel).subscribe(
+                        (registerFirstStepModelResult: RegisterFirstStepModel) => {
+                            this.router.navigate([`/registerSecondStep/${registerFirstStepModelResult.codigoSolCredito}`]);
+                        }, error => console.error(error)
+                    );
+                }
             }, error => console.error(error)
         );
     }

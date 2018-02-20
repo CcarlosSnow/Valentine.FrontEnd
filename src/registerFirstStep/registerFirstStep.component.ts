@@ -5,4 +5,4 @@ import { Component } from '@angular/core';
     templateUrl: './registerFirstStep.component.html',
 })
 
-export class RegisterSecondStepComponent {}
+export class RegisterFirstStepComponent {}

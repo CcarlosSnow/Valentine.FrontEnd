@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { Http, Response, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs';
 
-import { ParametroModel } from '../models';
+import { UbigeoModel } from '../models';
 import { EnviromentsConstants, HostnameConstants } from '../shared/constants';
 import { HttpService } from './http.service';
 import { Utilities } from './utilities';
 
 @Injectable()
-export class ParametroService {
-    private PARAMETRO_ENDPOINT: string = 'T_Parametro';
+export class UbigeoService {
+    private PARAMETRO_ENDPOINT: string = 'T_Ubigeo';
     private BASE_URL: string = Utilities.buildRequestURL(
         HostnameConstants.VALENTINE_WEBAPI.host);
     private REQUEST_URL: string;
@@ -20,7 +20,7 @@ export class ParametroService {
         }
     }
 
-    public getByPadreID(padreId: number): Observable<ParametroModel[]> {
+    public getByPadreID(padreId: number): Observable<UbigeoModel[]> {
         this.URL = `${this.REQUEST_URL}/${padreId}`;
         return this.httpService.get(this.URL);
     }
