@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RegisterFirstStepModel, ParametroModel } from '../../app/models';
 import { ClipsService, ParametroService, SolicitudCreditoService } from '../../app/services';
 import { FormStatusConstants, ParametroConstants } from '../../app/shared/constants';
+import { IMyDpOptions } from 'mydatepicker';
 
 
 @Component({
@@ -36,6 +37,10 @@ export class RegisterFirstStepAddComponent implements OnInit, OnDestroy {
         gradoInstruccion: new FormControl(null, [Validators.required]),
         destinoCredito: new FormControl(null, [Validators.required]),
     });
+
+    public myDatePickerOptions: IMyDpOptions = {
+        dateFormat: 'dd/mm/yyyy',
+    };
 
     constructor(
         private clipsService: ClipsService,

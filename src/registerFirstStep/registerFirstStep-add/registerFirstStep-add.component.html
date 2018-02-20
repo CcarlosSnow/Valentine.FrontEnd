@@ -32,7 +32,7 @@
                         Fecha de Nacimiento
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <input type="text" class="form-control input-sm" maxlength="500" formControlName="fechaNacimiento" />
+                        <my-date-picker [options]="myDatePickerOptions" formControlName="fechaNacimiento"></my-date-picker>
                     </div>
                 </div>
                 <div class="row">
@@ -50,7 +50,7 @@
                         Numero Documento
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <input type="text" class="form-control input-sm" maxlength="255" formControlName="numeroDocumento" />
+                        <input type="text" class="form-control input-sm" maxlength="11" formControlName="numeroDocumento" />
                     </div>
                 </div>
                 <div class="row">
@@ -58,7 +58,8 @@
                         Dígito de Verificación
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <input type="text" class="form-control input-sm" maxlength="1" formControlName="digitoVerificacion" />
+                        <input type="number" min="0" max="9" step="1" class="form-control input-sm" maxlength="1" formControlName="digitoVerificacion"
+                        />
                     </div>
                 </div>
                 <div class="row">
@@ -84,7 +85,7 @@
                         Numero de Celular
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <input type="text" class="form-control input-sm" maxlength="255" formControlName="numeroCelular" />
+                        <input type="text" class="form-control input-sm" maxlength="9" formControlName="numeroCelular" />
                     </div>
                 </div>
                 <div class="row">
@@ -92,7 +93,8 @@
                         Ingreso Mensual
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <input type="number" min="1" max="1000000" step="1" class="form-control input-sm" maxlength="255" formControlName="ingresosMensuales" />
+                        <input type="number" min="1" max="1000000" step="1" class="form-control input-sm" maxlength="255" formControlName="ingresosMensuales"
+                        />
                     </div>
                 </div>
                 <div class="row">
