@@ -2,11 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { RegisterFirstStepModel, ParametroModel } from '../../app/models';
+import { IMyDpOptions } from 'mydatepicker';
+import { ParametroModel, RegisterFirstStepModel } from '../../app/models';
 import { ClipsService, ParametroService, SolicitudCreditoService } from '../../app/services';
 import { FormStatusConstants, ParametroConstants } from '../../app/shared/constants';
-import { IMyDpOptions } from 'mydatepicker';
-
 
 @Component({
     selector: 'app-registerFirstStep-add',
@@ -38,7 +37,7 @@ export class RegisterFirstStepAddComponent implements OnInit, OnDestroy {
         destinoCredito: new FormControl(null, [Validators.required]),
     });
 
-    public myDatePickerOptions: IMyDpOptions = {
+    myDatePickerOptions: IMyDpOptions = {
         dateFormat: 'dd/mm/yyyy',
     };
 
@@ -49,30 +48,7 @@ export class RegisterFirstStepAddComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private router: Router,
     ) {
-
-        this.parametroService.getByPadreID(ParametroConstants.TIPODOCUMENTO).subscribe(
-            (result: ParametroModel[]) => {
-                this.tipoDocumentoCombo = result;
-            },
-            error => console.error(error));
-
-        this.parametroService.getByPadreID(ParametroConstants.SEXO).subscribe(
-            (result: ParametroModel[]) => {
-                this.sexoCombo = result;
-            },
-            error => console.error(error));
-
-        this.parametroService.getByPadreID(ParametroConstants.GRADOINSTRUCCION).subscribe(
-            (result: ParametroModel[]) => {
-                this.gradoInstruccionCombo = result;
-            },
-            error => console.error(error));
-
-        this.parametroService.getByPadreID(ParametroConstants.DESTINOCREDITO).subscribe(
-            (result: ParametroModel[]) => {
-                this.destinoCreditoCombo = result;
-            },
-            error => console.error(error));
+        this.payloads();
     }
 
     ngOnInit(): void {
@@ -83,22 +59,53 @@ export class RegisterFirstStepAddComponent implements OnInit, OnDestroy {
         // any
     }
 
+    payloads() {
+        this.parametroService.getByPadreID(ParametroConstants.TIPODOCUMENTO).subscribe(
+            (result: ParametroModel[]) => {
+                this.tipoDocumentoCombo = result;
+            },
+            error => console.error(error),
+        );
+
+        this.parametroService.getByPadreID(ParametroConstants.SEXO).subscribe(
+            (result: ParametroModel[]) => {
+                this.sexoCombo = result;
+            },
+            error => console.error(error),
+        );
+
+        this.parametroService.getByPadreID(ParametroConstants.GRADOINSTRUCCION).subscribe(
+            (result: ParametroModel[]) => {
+                this.gradoInstruccionCombo = result;
+            },
+            error => console.error(error),
+        );
+
+        this.parametroService.getByPadreID(ParametroConstants.DESTINOCREDITO).subscribe(
+            (result: ParametroModel[]) => {
+                this.destinoCreditoCombo = result;
+            },
+            error => console.error(error),
+        );
+    }
+
     registerFirstStep(): void {
         this.clipsService.getResultEvaluation().subscribe(
             (result: string) => {
                 console.log(result);
-                if (result == 'rechazada') {
+                if (result === 'rechazada') {
                     this.router.navigate(['/notSuccessClips']);
-                }
-                else {
+                } else {
                     this.registerFirstStepModel.setAll(this.registerFirstStepForm.value);
                     this.solicitudCreditoService.registerFirstStep(this.registerFirstStepModel).subscribe(
                         (registerFirstStepModelResult: RegisterFirstStepModel) => {
                             this.router.navigate([`/registerSecondStep/${registerFirstStepModelResult.codigoSolCredito}`]);
-                        }, error => console.error(error)
+                        },
+                        error => console.error(error),
                     );
                 }
-            }, error => console.error(error)
+            },
+            error => console.error(error),
         );
     }
 }

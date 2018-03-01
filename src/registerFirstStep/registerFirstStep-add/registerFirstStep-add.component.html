@@ -1,3 +1,118 @@
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>Registro de Solicitud de Crédito</h2>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <form [formGroup]="registerFirstStepForm">
+
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="Nombres">Nombres</label>
+                        <input type="text" class="form-control" id="Nombres" maxlength="255" formControlName="nombreSolicitante">
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="ApellidoPaterno">Apellido Paterno</label>
+                        <input type="text" class="form-control" id="ApellidoPaterno" maxlength="255" formControlName="apellidoParternoSolicitante">
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="ApellidoMaterno">Apellido Materno</label>
+                        <input type="text" class="form-control" id="ApellidoMaterno" maxlength="255" formControlName="apellidoParternoSolicitante">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label for="FechaNacimiento">Fecha de Nacimiento</label>
+                        <my-date-picker id="FechaNacimiento" [options]="myDatePickerOptions" formControlName="fechaNacimiento"></my-date-picker>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="TipoDocumento">Tipo de Documento</label>
+                        <select id="TipoDocumento" class="form-control input-sm" formControlName="tipoDocumento">
+                            <option 
+                                *ngFor="let tipoDocumento of tipoDocumentoCombo"
+                                [ngValue]="tipoDocumento.ID">
+                                    {{tipoDocumento.Nombre}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="NumeroDocumento">Numero Documento</label>
+                        <input type="text" class="form-control input-sm" maxlength="11" id="NumeroDocumento" formControlName="numeroDocumento" />
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="DigitoVerificacion">Dígito de Verificación</label>
+                        <input type="number" min="0" max="3" step="1" id="DigitoVerificacion" class="form-control input-sm" maxlength="1" formControlName="digitoVerificacion"/>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label for="Sexo">Sexo</label>
+                        <select class="form-control input-sm" id="Sexo" formControlName="genero">
+                            <option 
+                                *ngFor="let sexo of sexoCombo"
+                                [ngValue]="sexo.ID">
+                                    {{sexo.Nombre}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-5 mb-3">
+                        <label for="CorreoElectronico">Correo Electrónico</label>
+                        <input type="text" class="form-control" id="CorreoElectronico" maxlength="255" formControlName="correoElectronico">
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="NumerodeCelular">Numero de Celular</label>
+                        <input type="text" class="form-control" id="NumerodeCelular" maxlength="9" formControlName="numeroCelular">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label for="IngresoMensual">Ingreso Mensual</label>
+                        <input type="number" min="1" max="1000000" step="1" class="form-control" id="IngresoMensual" maxlength="255" formControlName="ingresosMensuales">
+                    </div>
+                    <div class="col-md-5 mb-3">
+                        <label for="GradoInstruccion">Grado de Instrucción</label>
+                        <select class="form-control input-sm" id="GradoInstruccion" formControlName="gradoInstruccion">
+                            <option 
+                                *ngFor="let gradoInstruccion of gradoInstruccionCombo"
+                                [ngValue]="gradoInstruccion.ID">
+                                    {{gradoInstruccion.Nombre}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="DestinoCredito">Destino del Crédito</label>
+                        <select class="form-control" id="DestinoCredito" formControlName="destinoCredito">
+                            <option
+                                *ngFor="let destinoCredito of destinoCreditoCombo"
+                                [ngValue]="destinoCredito.ID">
+                                    {{destinoCredito.Nombre}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <hr class="mb-4">
+                <button 
+                    type="submit"
+                    class="btn btn-primary btn-lg btn-block"
+                    [disabled]="!registerFirstStepForm.valid"
+                    (click)="registerFirstStep()">
+                        <i class="fa fa-floppy-o" aria-hidden="true"></i> Siguiente
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<hr class="mb-4">
+<hr class="mb-4">
+<hr class="mb-4">
+
 <h2> Registro de Solicitud de Crédito</h2>
 <div class="container">
     <div>
