@@ -1,7 +1,8 @@
 <h1>Felicitaciones su solicitud ha sido admitida</h1>
 
 <p>
-    Para iniciar el financiamiento necesitamos verificar tu dirección e ingresos económicos para lo cual necesitamos que adjuntes la siguiente información:
+    Para iniciar el financiamiento necesitamos verificar tu dirección e ingresos económicos para lo cual necesitamos que adjuntes
+    la siguiente información:
 </p>
 
 <ul>
@@ -12,6 +13,16 @@
         Una copia legible de la última factura de cualquiero servicio público (agua, luz, gas, cable, teléfono, etc).
     </li>
     <li>
-        Una copia legible de tu última boleta de pago para dependientes o recibos por honorarios para independientes que sustenten tus ingresos mensuales.
+        Una copia legible de tu última boleta de pago para dependientes o recibos por honorarios para independientes que sustenten
+        tus ingresos mensuales.
     </li>
 </ul>
+<input type="file" (change)="onFileUpload($event)" accept="image/*" />
+<ngx-datatable class="material colored-header sm table-hover padding-table" [loadingIndicator]="loadingIndicator" [rows]="rows"
+    [rowHeight]="35" [headerHeight]="35" [footerHeight]="35" [columns]="columns" [scrollbarV]="verticalScrollbar" [columnMode]="'force'">
+</ngx-datatable>
+<ng-template #actionsTemplate let-row="row">
+    <a class="btn btn-link btn-xs" href="javascript:;" container="body" data-toggle="tooltip" title="Quitar" (click)="onDelete(row)">
+        <i class="fa fa-trash fa-lg button-link-skyblue"></i>
+    </a>
+</ng-template>

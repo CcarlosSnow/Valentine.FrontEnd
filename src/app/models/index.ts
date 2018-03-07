@@ -4,3 +4,5 @@ export * from './registerFirstStep.model';
 export * from './parametro.model';
 export * from './ubigeo.model';
 export * from './registerSecondStep.model';
+export * from './uploadFile.model';
+export * from './archivo.model';

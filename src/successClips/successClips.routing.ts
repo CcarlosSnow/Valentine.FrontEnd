@@ -9,6 +9,10 @@ const successClipsRoutes: Routes = [
         component: SuccessComponent,
     },
     {
+        path: ':Id',
+        component: SuccessComponent,
+    },
+    {
         path: '**',
         redirectTo: '',
         pathMatch: 'sucessClips',

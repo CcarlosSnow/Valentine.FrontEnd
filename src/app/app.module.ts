@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 
 
-import { ClipsService, HttpService, ParametroService, SolicitudCreditoService, UbigeoService } from '../app/services';
+import { ArchivoService, ClipsService, HttpService, ParametroService, SolicitudCreditoService, UbigeoService } from '../app/services';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -27,6 +27,7 @@ import { SharedComponentModule } from './shared/shared.module';
     bootstrap: [AppComponent],
     schemas: [NO_ERRORS_SCHEMA],
     providers: [
+        ArchivoService,
         ClipsService,
         HttpService,
         ParametroService,
