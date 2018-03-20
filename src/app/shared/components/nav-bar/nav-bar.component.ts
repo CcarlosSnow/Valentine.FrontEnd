@@ -9,8 +9,15 @@ import { Router } from '@angular/router';
 
 export class NavBarComponent {
 
+    isCollapse: boolean = false;
+
     constructor(
         private router: Router,
     ) {}
+
+    toggleMenu() {
+        this.isCollapse = !this.isCollapse;
+        console.log(this.isCollapse);
+    }
 
 }

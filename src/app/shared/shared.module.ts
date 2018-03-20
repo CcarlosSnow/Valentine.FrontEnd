@@ -1,6 +1,7 @@
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { MyDatePickerModule } from 'mydatepicker';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 import { NavBarComponent } from './components';
 
@@ -8,6 +9,7 @@ import { NavBarComponent } from './components';
     imports: [
         NgxDatatableModule,
         MyDatePickerModule,
+        BsDropdownModule.forRoot(),
     ],
     declarations: [
         NavBarComponent,
@@ -20,6 +22,7 @@ import { NavBarComponent } from './components';
         NavBarComponent,
         NgxDatatableModule,
         MyDatePickerModule,
+        BsDropdownModule,
     ],
     providers: [],
 })
